@@ -1,66 +1,44 @@
-## Foundry
+# SomboPaymaster — ERC-4337 Sponsoring Paymaster
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Oracle School Workshop-06 · No.88 Sombo · Chain ID `20260619`
 
-Foundry consists of:
+## Live Services
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+| Service | URL |
+|---------|-----|
+| 🖥️ Frontend | http://141.11.156.4:8088 |
+| 🔍 OtterScan | http://141.11.156.4:5100 |
+| ⛓️ Anvil RPC | http://141.11.156.4:8588 |
 
-## Documentation
+## Quick Sync
 
-https://book.getfoundry.sh/
+```bash
+# Verify chain
+cast chain-id --rpc-url http://141.11.156.4:8588
+# → 20260619
 
-## Usage
-
-### Build
-
-```shell
-$ forge build
+# Get latest block
+cast block-number --rpc-url http://141.11.156.4:8588
 ```
 
-### Test
+## Run Locally
 
-```shell
-$ forge test
+```bash
+anvil --chain-id 20260619 --host 0.0.0.0 --port 8588 --block-time 2
 ```
 
-### Format
+## Structure
 
-```shell
-$ forge fmt
+```
+src/SomboPaymaster.sol    ERC-4337 Sponsoring Paymaster
+script/Deploy.s.sol       Deploy to Sepolia / local Anvil
+frontend/index.html       Chain status dashboard (port 8088)
+genesis.json              Chain genesis (chainId 20260619)
+docker-compose.yml        anvil + nginx via Docker
 ```
 
-### Gas Snapshots
+## Contract
 
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- **Type**: Sponsoring Paymaster (covers gas for all users)
+- **EntryPoint**: `0x0000000071727De22E5E9d8BAf0edAc6f37da032` (v0.7)
+- **Target**: Sepolia (11155111) — local dev on Anvil (20260619)
